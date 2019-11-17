@@ -65,7 +65,7 @@
     (empty? a-seq)
     '()
     (pred? (first a-seq))
-    (my-take-while pred? (rest a-seq))
+    (my-drop-while pred? (rest a-seq))
     :else
     a-seq))
 
