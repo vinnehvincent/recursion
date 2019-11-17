@@ -38,10 +38,9 @@
 (defn my-filter [pred? a-seq]
   (if (empty? a-seq)
     a-seq
-    (cons
-      (if (pred? (first a-seq)) (first a-seq))
+    (if (pred? (first a-seq))
+      (cons (first a-seq) (my-filter pred? (rest a-seq)))
       (my-filter pred? (rest a-seq)))))
-
 (defn sequence-contains? [elem a-seq]
   :-)
 
