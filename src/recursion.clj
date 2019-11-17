@@ -117,7 +117,7 @@
     (cons (apply list a-seq) (tails (rest a-seq)))))
 
 (defn inits [a-seq]
-  [:-])
+  (reverse (tails a-seq)))
 
 (defn rotations [a-seq]
   [:-])
