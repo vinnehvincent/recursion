@@ -117,16 +117,25 @@
     (cons (apply list a-seq) (tails (rest a-seq)))))
 
 (defn inits [a-seq]
-  (reverse (tails a-seq)))
+  (if (empty? a-seq)
+    (list ())
+    (cons (apply list a-seq) (inits (reverse (rest (reverse a-seq)))))))
 
 (defn rotations [a-seq]
-  [:-])
+  (into '() (set (map #(concat %1 %2) (tails a-seq) (reverse (inits a-seq))))))
 
 (defn my-frequencies-helper [freqs a-seq]
-  [:-])
+  (if (empty? a-seq)
+    freqs
+    (let [current-element (first a-seq)
+          current-element-count (get freqs current-element)
+          new-count (if (nil? current-element-count)
+                      1
+                      (inc current-element-count))]
+         (my-frequencies-helper (assoc freqs current-element new-count) (rest a-seq)))))
 
 (defn my-frequencies [a-seq]
-  [:-])
+  (my-frequencies-helper {} a-seq))
 
 (defn un-frequencies [a-map]
   [:-])
