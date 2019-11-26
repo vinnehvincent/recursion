@@ -157,10 +157,37 @@
     (vector (my-take half-length a-seq) (my-drop half-length a-seq))))
 
 (defn seq-merge [a-seq b-seq]
-  [:-])
+  (cond
+    (and (empty? a-seq) (empty? b-seq))
+    '()
+
+    (empty? a-seq)
+    (cons (first b-seq) (seq-merge a-seq (rest b-seq)))
+
+    (empty? b-seq)
+    (cons (first a-seq) (seq-merge (rest a-seq) b-seq))
+
+    (> (first a-seq) (first b-seq))
+    (cons (first b-seq) (seq-merge a-seq (rest b-seq)))
+
+    (= (first a-seq) (first b-seq))
+    (cons (first a-seq) (seq-merge (rest a-seq) b-seq))
+
+    :else
+    (cons (first a-seq) (seq-merge (rest a-seq) b-seq))))
+
+
 
 (defn merge-sort [a-seq]
-  [:-])
+    (cond
+      (= (count a-seq) 0)
+      '()
+      (= (count a-seq) 1)
+      a-seq
+      :else
+      (seq-merge (merge-sort (get (halve a-seq) 0)) (merge-sort (get (halve a-seq) 1)))))
+
+
 
 (defn split-into-monotonics [a-seq]
   [:-])
@@ -170,4 +197,3 @@
 
 (defn powerset [a-set]
   [:-])
-
